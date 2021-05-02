@@ -1,0 +1,126 @@
+@model dynamic  
+@{  
+    ViewBag.Title = "Home Page";  
+}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StudentMIS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style='background-color: lightblue'>
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Online MCQ Platform</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span> 
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                       <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container card mb-3 py-3">
+        <div>
+            <h2>Teacher Dashboard<h2>
+            <br>
+            <div class='container border'>
+                <h3>Teacher Details</h3>
+                <div class='container'>
+                    <h5>
+                        Id: -  @Model.Teacher.teacher_id
+                    </h5>
+                    <h5>
+                        Name: - @Model.Teacher.name
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+        <br/>
+
+        <div class='mb-3'>
+            <a  asp-action="Create" asp-route-teacher_id="@Model.Teacher.teacher_id">
+                <button type="submit" class="btn btn-dark">Create New Test</button>
+            </a>    
+        </div>
+        <div class='container border'>
+            <h3>Tests</h3>
+                <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Total Marks</th>
+                    <th scope="col">Accepting</th>
+                    <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Test test in Model.Test) {
+                        <tr>
+                            <th scope="row">  @test.test_title</th>
+                            <td> @test.duration hrs</td>
+                            <td> @test.total_points</td>
+                            <td> @test.isActive</td>
+                            <th>
+                                <div class='row'>
+                                    <form method='post' class='mr-1'>
+                                        <input type="hidden" name="type" class="form-control" id="type" value='edit' style="width:50%"/>
+                                        <input type="hidden" name="test_id" class="form-control" id="test_id" value=@test.test_id />
+                                        <input type="hidden" name="teacher_id" class="form-control" id="teacher_id" value=@Model.Teacher.teacher_id />
+                                        <button class="btn btn-success"> Edit</button>
+                                    </form>
+                                
+                                    <form method='post' class='mr-1'>
+                                        <input type="hidden" name="type" class="form-control" id="type" value='delete' style="width:50%">
+                                        <input type="hidden" name="test_id" class="form-control" id="test_id" value=@test.test_id />
+                                        <input type="hidden" name="teacher_id" class="form-control" id="teacher_id" value=@Model.Teacher.teacher_id />
+                                        <button class="btn btn-danger">Delete </button>
+                                    </form>
+
+                                    <form method='post' class='mr-1'>
+                                        <input type="hidden" name="type" class="form-control" id="type" value='end_test' style="width:50%">
+                                        <input type="hidden" name="test_id" class="form-control" id="test_id" value=@test.test_id />
+                                        <input type="hidden" name="teacher_id" class="form-control" id="teacher_id" value=@Model.Teacher.teacher_id />
+                                        <button class="btn btn-dark">End Test </button>
+                                    </form>
+
+                                    <form method='post' class='mr-1'>
+                                        <input type="hidden" name="type" class="form-control" id="type" value='attempts' style="width:50%">
+                                        <input type="hidden" name="test_id" class="form-control" id="test_id" value=@test.test_id />
+                                        <input type="hidden" name="teacher_id" class="form-control" id="teacher_id" value=@Model.Teacher.teacher_id />
+                                        <button class="btn btn-primary">See Attempts </button>
+                                    </form>
+                                </div>
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer class="footer" style='background-color: lightblue'>
+        <div class="footer-copyright text-center">
+            &copy; 2021 - Online MCQ Portal - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

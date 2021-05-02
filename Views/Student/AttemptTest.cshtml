@@ -1,0 +1,187 @@
+@model dynamic  
+@{  
+    ViewBag.Title = "Test Page";  
+}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StudentMIS </title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .container>p {
+            font-size: 32px
+        }
+
+        .options {
+            position: relative;
+            padding-left: 40px
+        }
+
+        #options label {
+            display: block;
+            margin-bottom: 15px;
+            font-size: 14px;
+            cursor: pointer
+        }
+
+        .options input {
+            opacity: 0
+        }
+
+        .checkmark {
+            position: absolute;
+            top: -1px;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #555;
+            border: 1px solid #ddd;
+            border-radius: 50%
+        }
+
+        .options input:checked~.checkmark:after {
+            display: block
+        }
+
+        .options .checkmark:after {
+            content: "";
+            width: 10px;
+            height: 10px;
+            display: block;
+            background: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: 300ms ease-in-out 0s
+        }
+
+        .options input[type="radio"]:checked~.checkmark {
+            background: #21bf73;
+            transition: 300ms ease-in-out 0s
+        }
+
+        .options input[type="radio"]:checked~.checkmark:after {
+            transform: translate(-50%, -50%) scale(1)
+        }
+
+        .btn-primary {
+            background-color: #555;
+            color: #ddd;
+            border: 1px solid #ddd
+        }
+
+        .btn-primary:hover {
+            background-color: #21bf73;
+            border: 1px solid #21bf73
+        }
+
+        .btn-success {
+            padding: 5px 25px;
+            background-color: #21bf73
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style='background-color: lightblue'>
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Online MCQ Platform</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span> 
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                       <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container card mb-3 py-3">
+        <div class="container border py-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <div>
+                        <h5>
+                            Title: - @Model.Test.test_title
+                        </h5>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div>
+                        <h5>
+                            Total Marks: - @Model.Test.total_points
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="card mb-3">
+                <form method="post">
+                    <div class="container">
+                        <div class="container">
+                            <div class="question">
+                                <div class="h5 card-header"><b>Q.@Model.Question.question_index. @Model.Question.que </b></div>
+                                <div class="pl-5 mt-3" id="options">
+                                    <label class="options">
+                                        @Model.Question.option1
+                                        <input type="radio" name="radio" value=@Model.Question.option1 required> 
+                                        <span class="checkmark"></span> 
+                                    </label> 
+                                    <label class="options">
+                                        @Model.Question.option2
+                                        <input type="radio" name="radio" value=@Model.Question.option2 > 
+                                        <span class="checkmark"></span> 
+                                    </label> 
+                                    <label class="options">
+                                        @Model.Question.option3
+                                        <input type="radio" name="radio" value=@Model.Question.option3> 
+                                        <span class="checkmark"></span> 
+                                    </label> 
+                                    <label class="options">
+                                        @Model.Question.option4
+                                        <input type="radio" name="radio" value=@Model.Question.option4 > 
+                                        <span class="checkmark"></span> 
+                                    </label> 
+                                </div>
+                            </div>
+                            <input type="hidden" name="question_id" value=@Model.Question.question_id >
+                            <input type="hidden" name="test_id" value=@ViewData["test_id"] >
+                            <input type="hidden" name="student_id" value=@ViewData["student_id"] >
+                            <input type="hidden" name="ans" value=@Model.Question.ans >
+                            <input type="hidden" name="points" value=@Model.Question.points > 
+                            <input type="hidden" name="question_index" value=@Model.Question.question_index >
+                            <input type="hidden" name="last_question_index" value=@ViewData["last_question_index"] > 
+
+                            <div class="d-flex align-items-center pt-3 mb-3">
+                                <div class="ml-auto mr-sm-5"> <button type="submit" class="btn btn-success">Next</button> </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer" style='background-color: lightblue'>
+        <div class="footer-copyright text-center">
+            &copy; 2021 - Online MCQ Portal - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

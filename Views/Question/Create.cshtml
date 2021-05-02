@@ -1,0 +1,139 @@
+@model dynamic  
+@{  
+    ViewBag.Title = "Question Add Page";  
+}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StudentMIS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style='background-color: lightblue'>
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Online MCQ Platform</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span> 
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                       <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container card mb-3 py-3">
+        <div class="container border py-3">
+            <div class="row">
+                <div class="col">
+                    <div>
+                        <h5>
+                            Title: - @Model.Test.test_title
+                        </h5>
+                    </div>
+                </div>
+                <div class="col">
+                    <div>
+                        <h5>
+                            Duration: - @Model.Test.duration
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col">
+                    <div>
+                        <h5>
+                            Password: - @Model.Test.test_password
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container py-3">
+            <div class="col-md-3 mt-4">
+                <a href='/Question/AddQuestion/@ViewData["Test_Id"]?teacher_id=@ViewData["teacher_id"] '>
+                    <button type="submit" class="btn btn-success">Add Question</button>
+                </a>
+            </div>
+            <br />
+        </div>
+        <h4> Questions in Current Test</h4>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Correct Answer</th>
+                <th scope="col">Points</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Question question in Model.Question) {
+                    <tr>
+                        <th scope="row">  @question.que</th>
+                        <td> @question.ans</td>
+                        <td> @question.points</td>
+                        <td> 
+                            <div class='row'>
+                                <div class="col-md-3">
+                                    <form method='post'>
+                                        <input type="hidden" name="type" class="form-control" id="type" value='edit' style="width:50%">
+                                        <input type="hidden" name="test_id" class="form-control" id="test_id" value=@ViewData["Test_Id"] style="width:50%">
+                                        <input type="hidden" name="question_id" class="form-control" id="question_id" value=@question.question_id style="width:50%">
+                                        <input type="hidden" name="teacher_id" class="form-control" id="teacher_id" value=@ViewData["teacher_id"] style="width:50%">
+                                        <input type="hidden" name="question_index" class="form-control" id="question_index" value=@question.question_index style="width:50%">
+                                        <button class="btn btn-success"> Edit</button>
+                                    </form>
+                                </div>
+                                <div class="col-md-3">
+                                    <form method='post'>
+                                        <input type="hidden" name="type" class="form-control" id="type" value='delete' style="width:50%">
+                                        <input type="hidden" name="test_id" class="form-control" id="test_id" value=@ViewData["Test_Id"] style="width:50%">
+                                        <input type="hidden" name="question_id" class="form-control" id="question_id" value=@question.question_id style="width:50%">
+                                        <input type="hidden" name="teacher_id" class="form-control" id="teacher_id" value=@ViewData["teacher_id"] style="width:50%">
+                                        <input type="hidden" name="question_index" class="form-control" id="question_index" value=@question.question_index style="width:50%">
+                                        <button class="btn btn-danger">Delete </button>
+                                    </form>
+                                </div>  
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div>
+            <form method='post'>
+                <input type="hidden" name="type" class="form-control" id="type" value='other' style="width:50%">
+                <input type="hidden" name="test_id" class="form-control" id="test_id" value=@ViewData["Test_Id"] style="width:50%">
+                <input type="hidden" name="question_id" class="form-control" id="question_id" value=-1 style="width:50%">
+                <input type="hidden" name="teacher_id" class="form-control" id="teacher_id" value=@ViewData["teacher_id"] style="width:50%">
+                <input type="hidden" name="question_index" class="form-control" id="question_index" value=1 style="width:50%">
+                <button class="btn btn-success">Create Test</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer" style='background-color: lightblue'>
+        <div class="footer-copyright text-center">
+            &copy; 2021 - Online MCQ Portal - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

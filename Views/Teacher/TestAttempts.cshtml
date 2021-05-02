@@ -1,0 +1,97 @@
+@model dynamic  
+@{  
+    ViewBag.Title = "Question Add Page";  
+}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StudentMIS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style='background-color: lightblue'>
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Online MCQ Platform</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span> 
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                       <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container card mb-3 py-3">
+        <div class="container border py-3">
+            <div class="row">
+                <div class="col">
+                    <div>
+                        <h5>
+                            Title: - @Model.Test.test_title
+                        </h5>
+                    </div>
+                </div>
+                <div class="col">
+                    <div>
+                        <h5>
+                            Duration: - @Model.Test.duration hour(s)
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col">
+                    <div>
+                        <h5>
+                            Password: - @Model.Test.test_password
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="container border mt-3 py-2">
+                <h3>Attempts</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (TestAttempts test in Model.TestAttempts) {
+                            <tr>
+                                <th scope="row">  @test.name</th>
+                                <td> @test.score / @test.total_score </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer" style='background-color: lightblue'>
+        <div class="footer-copyright text-center">
+            &copy; 2021 - Online MCQ Portal - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

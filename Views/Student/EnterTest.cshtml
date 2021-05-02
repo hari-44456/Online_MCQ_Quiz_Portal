@@ -1,0 +1,100 @@
+@model dynamic  
+@{  
+    ViewBag.Title = "Home Page";  
+}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StudentMIS </title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style type="text/css">
+        div.dropdown-menu.open
+        {
+            max-height: 10px !important;
+            overflow: hidden;
+        }
+        ul.dropdown-menu.inner
+        {
+            max-height: 10px !important;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style='background-color: lightblue'>
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Online MCQ Platform</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span> 
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                       <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container card mb-3 py-3">
+        <div class="container mb-3">
+            <h2>Select Test from here<h2>
+            <br>
+            <h4 style="color:red">
+                @ViewData["error"]
+            </h4>
+            <div class='container'>
+                <form method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>
+                                <label for="test_title">Select A Test</label>
+                            </h5>
+                            <select name="test_title" id="test_title" class="form-control selectpicker mb-3" data-show-subtext="true" data-live-search="true" required>
+                                <option value="">--Select Test--</option>
+                                @foreach (Test test in Model.Test) {
+                                    <option value=@test.test_title >@test.test_title</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <h5>
+                                    <label for="password">Enter Test Password</label>
+                                </h5>
+                                <input type="text" name="test_password" class="form-control" id="test_password" style="width:50%" placeholder="Enter Test Password" required>
+                                <input type="hidden" name="student_id" class="form-control" id="student_id" style="width:50%" value=@ViewData["id"] required>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-success">
+                            Enter Into Test
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer" style='background-color: lightblue'>
+        <div class="footer-copyright text-center">
+            &copy; 2021 - Online MCQ Portal - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

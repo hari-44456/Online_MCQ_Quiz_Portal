@@ -1,0 +1,109 @@
+@model IEnumerable<WCE.Models.Question>
+@{
+    ViewData["Title"]="Index";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StudentMIS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style='background-color: lightblue'>
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Online MCQ Platform</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span> 
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                       <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container card mb-3 py-3">
+        <h4 class='mb-3'>
+            Edit Your Question @ViewData["Test_id"]
+        </h4>
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="test_id" id="test_id" class="form-control" value=@ViewData["Test_id"] required/>
+            <input type="hidden" name="question_id" id="question_id" class="form-control" value=@ViewData["question_id"] required/>
+            <div class="form-outline mb-4">
+                <label class="form-label" for="que">Question</label>
+                <input type="text" name="que" id="que" class="form-control" placeholder="Enter Question" value=@ViewData["question"] required/>
+            </div>
+            <div class='row mb-4'>
+                <div class="col">
+                    <div class="form-outline">
+                        <label class="form-label" for="option1">Option A</label>
+                        <input type="text" name="option1" id="option1" class="form-control" placeholder="Enter Option A" value=@ViewData["option1"] required/>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-outline">
+                        <label class="form-label" for="option2">Option B</label>
+                        <input type="text" name="option2" id="option2" class="form-control" placeholder="Enter Option B" value=@ViewData["option2"] required/>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-outline">
+                        <label class="form-label" for="option3">Option C</label>
+                        <input type="text" name="option3" id="option3" class="form-control" placeholder="Enter Option C" value=@ViewData["option3"] required/>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-outline">
+                        <label class="form-label" for="option4">Option D</label>
+                        <input type="text" name="option4" id="option4" class="form-control" placeholder="Enter Option D" value=@ViewData["option4"] required/>
+                    </div>
+                </div>
+            </div>
+            <div class='row mb-4'>
+                <div class="col-md-3">
+                    <div class="form-outline">
+                        <label class="form-label" for="ans">Answer</label>
+                        <input type="text" name="ans" id="ans" class="form-control" placeholder="Enter Answer" value=@ViewData["ans"] required/>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-outline">
+                        <label class="form-label" for="points">Marks</label>
+                        <input type="number" name="points" id="points" class="form-control" placeholder="Enter Marks" value=@ViewData["points"] required/>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-outline">
+                        <label class="form-label" for="image">Image</label>
+                        <input type="file" name="image" id="image" class="form-control" class='btn btn-default' accept='image/*'/>
+                        <input type="hidden" name="teacher_id" id="teacher_id" class="form-control" value=@ViewData["teacher_id"] required/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mt-4">
+                <button type="submit" class="btn btn-success">Update</button>
+            </div>
+        </form>
+    </div>
+
+    <footer class="footer" style='background-color: lightblue'>
+        <div class="footer-copyright text-center">
+            &copy; 2021 - Online MCQ Portal - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

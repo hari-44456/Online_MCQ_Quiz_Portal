@@ -1,0 +1,96 @@
+
+@model IEnumerable<WCE.Models.Student>
+@{
+    ViewData["Title"]="Index";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StudentMIS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style='background-color: lightblue'>
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WCE</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Student
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-controller="Student" asp-action="Login">Login</a>
+                                <a class="dropdown-item" asp-controller="Student" asp-action="Register">Register</a>
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Teacher
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-controller="Teacher" asp-action="Login">Login</a>
+                                <a class="dropdown-item" asp-controller="Teacher" asp-action="Register">Register</a>
+                            </div>
+                        </div>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Admin">Admin</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container card">
+        <main role="main" class="pb-3 card-body">
+
+            <h3 class='card-header'>Student Login</h3>
+
+            <br/>
+            <p class="card-text" style="color: red">Invalid Login Credantials</p>
+            <br/>
+
+            <div class="container ">
+
+                <form method="post">
+                <div class="">
+                    <div class="">
+                        <div class="form-group">
+                            <label for="name">Enter User Name</label>
+                            <input type="text" name="username" class="form-control" id="username" style="width:50%" placeholder="Enter User Name">
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="form-group">
+                            <label for="name">Enter Password</label>
+                            <input type="password" name="password" class="form-control" id="password" style="width:50%" placeholder="Enter Password">
+                        </div>
+                    </div>
+                <input type="submit" class="btn btn-success" />
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer" style='background-color: lightblue'>
+        <div class="footer-copyright text-center">
+            &copy; 2021 - Online MCQ Portal - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
