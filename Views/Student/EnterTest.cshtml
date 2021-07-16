@@ -47,7 +47,7 @@
     </header>
     <div class="container card mb-3 py-3">
         <div class="container mb-3">
-            <h2>Select Test from here<h2>
+            <h2>Select Type of Appointment<h2>
             <br>
             <h4 style="color:red">
                 @ViewData["error"]
@@ -61,26 +61,15 @@
                             </h5>
                             <select name="test_title" id="test_title" class="form-control selectpicker mb-3" data-show-subtext="true" data-live-search="true" required>
                                 <option value="">--Select Test--</option>
-                                @foreach (Test test in Model.Test) {
-                                    <option value=@test.test_title >@test.test_title</option>
-                                }
+                                <option value="Check Up">Check Up</option>
+                                <option value="Cleaning">Cleaning</option>
+                                <option value="Root Canal">Root Canal</option>
                             </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <h5>
-                                    <label for="password">Enter Test Password</label>
-                                </h5>
-                                <input type="text" name="test_password" class="form-control" id="test_password" style="width:50%" placeholder="Enter Test Password" required>
-                                <input type="hidden" name="student_id" class="form-control" id="student_id" style="width:50%" value=@ViewData["id"] required>
-                            </div>
                         </div>
                     </div>
                     <div>
                         <button class="btn btn-success">
-                            Enter Into Test
+                            Submit
                         </button>
                     </div>
                 </form>
